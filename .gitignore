@@ -23,3 +23,9 @@
 hs_err_pid*
 /JSQLWeb/nbproject/private/
 /JSQLServer/nbproject/private/
+/DesktopClient/nbproject/private/
+/WebService/nbproject/private/
+/WebService/build/
+/DesktopClient/build/
+/DesktopClient/dist/
+/WebService/dist/
