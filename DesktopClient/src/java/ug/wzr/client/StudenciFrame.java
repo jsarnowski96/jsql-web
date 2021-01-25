@@ -5,17 +5,52 @@
  */
 package ug.wzr.client;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.xml.ws.WebServiceRef;
+import ug.wzr.Student;
+import ug.wzr.StudentService_Service;
+
 /**
  *
  * @author jsarnowski
  */
 public class StudenciFrame extends javax.swing.JFrame {
 
+    @WebServiceRef(wsdlLocation = "META-INF/wsdl/localhost_8080/WebService/StudentService.wsdl")
+    private static StudentService_Service StudentService;
+                    
+    private Object[][] data = new Object[][]{};
+    private List<Student> studenci;
+    private DefaultTableModel model;
     /**
      * Creates new form StudenciFrame
      */
     public StudenciFrame() {
         initComponents();
+                
+        studenci = getAllStudents();
+        data = new Object[studenci.size()][4];
+        
+                
+        //studenciTable = new JTable(new DefaultTableModel(data, columnNames));
+        model = (DefaultTableModel) studenciTable.getModel();
+                
+        for(int i = 0; i < data.length; i++) {
+            data[i][0] = studenci.get(i).getNrIndeksu();
+            data[i][1] = studenci.get(i).getImie();
+            data[i][2] = studenci.get(i).getNazwisko();
+            
+            model.addRow(data[i]);
+        }
+                
+        studenciTable.setModel(model);
+        
+        this.setTitle("Studenci");
+        this.pack();
     }
 
     /**
@@ -27,17 +62,66 @@ public class StudenciFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        frameTitleLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        studenciTable = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("StudenciFrame"); // NOI18N
+
+        frameTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        frameTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        frameTitleLabel.setText("Studenci");
+
+        studenciTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numer indeksu", "Imię", "Nazwisko", "Akcje"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        studenciTable.setCellSelectionEnabled(true);
+        jScrollPane1.setViewportView(studenciTable);
+        studenciTable.getAccessibleContext().setAccessibleName("studenciTable");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(375, 375, 375)
+                        .addComponent(frameTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(199, 199, 199)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(frameTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -72,12 +156,70 @@ public class StudenciFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run() {                            
                 new StudenciFrame().setVisible(true);
+                //for(int i = 0; i < data.length; i++) {
+                //   data[i][0] = studenci.get(i).getNrIndeksu();
+                //    data[i][1] = studenci.get(i).getImie();
+                //    data[i][2] = studenci.get(i).getNazwisko();
+                //}
+                
+                //for(int i = 0; i < data.length; i++) {
+                //    for(int j = 0; j < 4; j++) {
+                //        System.out.println(data[i][j]);
+                //    }
+                //}
+                
+                //for(int i = 0; i < studenci.size(); i++) {
+                //    System.out.println("STUDENT " + Integer.toString(i));
+                //    System.out.println(studenci.get(i).getNrIndeksu());
+                //    System.out.println(studenci.get(i).getImie());
+                //   System.out.println(studenci.get(i).getNazwisko());
+                //}
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel frameTitleLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable studenciTable;
     // End of variables declaration//GEN-END:variables
+
+    private static Boolean createStudent(int nrIndeksu, java.lang.String imie, java.lang.String nazwisko) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.StudentService port = StudentService.getStudentServicePort();
+        return port.createStudent(nrIndeksu, imie, nazwisko);
+    }
+
+    private static Student getStudent(int nrIndeksu) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.StudentService port = StudentService.getStudentServicePort();
+        return port.getStudent(nrIndeksu);
+    }
+
+    private static Boolean updateStudent(int nrIndeksu, java.lang.String imie, java.lang.String nazwisko) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.StudentService port = StudentService.getStudentServicePort();
+        return port.updateStudent(nrIndeksu, imie, nazwisko);
+    }
+
+    private static boolean deleteStudent(int nrIndeksu) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.StudentService port = StudentService.getStudentServicePort();
+        return port.deleteStudent(nrIndeksu);
+    }
+
+    private static java.util.List<ug.wzr.Student> getAllStudents() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.StudentService port = StudentService.getStudentServicePort();
+        return port.getAllStudents();
+    }
 }

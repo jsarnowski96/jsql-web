@@ -4,6 +4,18 @@
 <xsd:import namespace="http://wzr.ug/" schemaLocation="http://localhost:8080/WebService/StudentService?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="createStudent">
+<part name="parameters" element="tns:createStudent"/>
+</message>
+<message name="createStudentResponse">
+<part name="parameters" element="tns:createStudentResponse"/>
+</message>
+<message name="updateStudent">
+<part name="parameters" element="tns:updateStudent"/>
+</message>
+<message name="updateStudentResponse">
+<part name="parameters" element="tns:updateStudentResponse"/>
+</message>
 <message name="getAllStudents">
 <part name="parameters" element="tns:getAllStudents"/>
 </message>
@@ -16,7 +28,21 @@
 <message name="getStudentResponse">
 <part name="parameters" element="tns:getStudentResponse"/>
 </message>
+<message name="deleteStudent">
+<part name="parameters" element="tns:deleteStudent"/>
+</message>
+<message name="deleteStudentResponse">
+<part name="parameters" element="tns:deleteStudentResponse"/>
+</message>
 <portType name="StudentService">
+<operation name="createStudent">
+<input wsam:Action="http://wzr.ug/StudentService/createStudentRequest" message="tns:createStudent"/>
+<output wsam:Action="http://wzr.ug/StudentService/createStudentResponse" message="tns:createStudentResponse"/>
+</operation>
+<operation name="updateStudent">
+<input wsam:Action="http://wzr.ug/StudentService/updateStudentRequest" message="tns:updateStudent"/>
+<output wsam:Action="http://wzr.ug/StudentService/updateStudentResponse" message="tns:updateStudentResponse"/>
+</operation>
 <operation name="getAllStudents">
 <input wsam:Action="http://wzr.ug/StudentService/getAllStudentsRequest" message="tns:getAllStudents"/>
 <output wsam:Action="http://wzr.ug/StudentService/getAllStudentsResponse" message="tns:getAllStudentsResponse"/>
@@ -25,9 +51,31 @@
 <input wsam:Action="http://wzr.ug/StudentService/getStudentRequest" message="tns:getStudent"/>
 <output wsam:Action="http://wzr.ug/StudentService/getStudentResponse" message="tns:getStudentResponse"/>
 </operation>
+<operation name="deleteStudent">
+<input wsam:Action="http://wzr.ug/StudentService/deleteStudentRequest" message="tns:deleteStudent"/>
+<output wsam:Action="http://wzr.ug/StudentService/deleteStudentResponse" message="tns:deleteStudentResponse"/>
+</operation>
 </portType>
 <binding name="StudentServicePortBinding" type="tns:StudentService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="createStudent">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="updateStudent">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getAllStudents">
 <soap:operation soapAction=""/>
 <input>
@@ -38,6 +86,15 @@
 </output>
 </operation>
 <operation name="getStudent">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="deleteStudent">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

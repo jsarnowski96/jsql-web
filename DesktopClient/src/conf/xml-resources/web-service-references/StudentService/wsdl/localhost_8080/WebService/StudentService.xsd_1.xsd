@@ -1,5 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.3 (RELEASE-2.4.3-ad3323c; 2019-01-21T17:46:06+0000) JAXWS-RI/2.3.2 JAXWS-API/2.3.2 JAXB-RI/2.3.2 JAXB-API/2.3.2 git-revision#unknown. --><xs:schema xmlns:tns="http://wzr.ug/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://wzr.ug/">
 
+<xs:element name="createStudent" type="tns:createStudent"/>
+
+<xs:element name="createStudentResponse" type="tns:createStudentResponse"/>
+
+<xs:element name="deleteStudent" type="tns:deleteStudent"/>
+
+<xs:element name="deleteStudentResponse" type="tns:deleteStudentResponse"/>
+
 <xs:element name="getAllStudents" type="tns:getAllStudents"/>
 
 <xs:element name="getAllStudentsResponse" type="tns:getAllStudentsResponse"/>
@@ -8,9 +16,39 @@
 
 <xs:element name="getStudentResponse" type="tns:getStudentResponse"/>
 
+<xs:element name="updateStudent" type="tns:updateStudent"/>
+
+<xs:element name="updateStudentResponse" type="tns:updateStudentResponse"/>
+
+<xs:complexType name="deleteStudent">
+<xs:sequence>
+<xs:element name="nrIndeksu" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteStudentResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createStudent">
+<xs:sequence>
+<xs:element name="nrIndeksu" type="xs:int"/>
+<xs:element name="imie" type="xs:string" minOccurs="0"/>
+<xs:element name="nazwisko" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createStudentResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getStudent">
 <xs:sequence>
-<xs:element name="nrIndeksu" type="xs:string" minOccurs="0"/>
+<xs:element name="nrIndeksu" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -35,6 +73,20 @@
 <xs:complexType name="getAllStudentsResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:student" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateStudent">
+<xs:sequence>
+<xs:element name="nrIndeksu" type="xs:int"/>
+<xs:element name="imie" type="xs:string" minOccurs="0"/>
+<xs:element name="nazwisko" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateStudentResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

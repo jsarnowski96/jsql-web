@@ -103,7 +103,6 @@ public class StudentService {
         databaseConnection.ConnectToDatabase();
         connection = databaseConnection.getConnection();
         
-        Student student;
         int ds;
         String query = "use ug_wzr; delete from ProjektyStudenci where nrIndeksu = " + Integer.toString(nrIndeksu);
         
@@ -111,17 +110,17 @@ public class StudentService {
             PreparedStatement ps = connection.prepareStatement(query);
             ds = ps.executeUpdate();
             
-            if(ds > 0) {          
+            if(ds >= 0) {
                 query = "delete from Studenci where nrIndeksu = " + Integer.toString(nrIndeksu);
                 ps.close();
                 ps = connection.prepareStatement(query);
                 ds = ps.executeUpdate();
-                
+
                 if(ds > 0) {
                     ps.close();
                     connection.close();
                     databaseConnection.CloseConnection();
-                
+
                     return true;
                 }
             }

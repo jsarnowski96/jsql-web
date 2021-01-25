@@ -8,4 +8,6 @@
     <system systemId="http://localhost:8080/WebService/StudentService?xsd=1" uri="wsdl/localhost_8080/WebService/StudentService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/WebService/ProjektStudentService?wsdl" uri="wsdl/localhost_8080/WebService/ProjektStudentService.wsdl"/>
     <system systemId="http://localhost:8080/WebService/ProjektStudentService?xsd=1" uri="wsdl/localhost_8080/WebService/ProjektStudentService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebService/ProjektService?wsdl" uri="wsdl/localhost_8080/WebService/ProjektService.wsdl"/>
+    <system systemId="http://localhost:8080/WebService/ProjektService?xsd=1" uri="wsdl/localhost_8080/WebService/ProjektService.xsd_1.xsd"/>
 </catalog>

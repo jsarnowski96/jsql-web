@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.3 (RELEASE-2.4.3-ad3323c; 2019-01-21T17:46:06+0000) JAXWS-RI/2.3.2 JAXWS-API/2.3.2 JAXB-RI/2.3.2 JAXB-API/2.3.2 git-revision#unknown. --><xs:schema xmlns:tns="http://wzr.ug/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://wzr.ug/">
+
+<xs:element name="createProjekt" type="tns:createProjekt"/>
+
+<xs:element name="createProjektResponse" type="tns:createProjektResponse"/>
+
+<xs:element name="deleteProjekt" type="tns:deleteProjekt"/>
+
+<xs:element name="deleteProjektResponse" type="tns:deleteProjektResponse"/>
+
+<xs:element name="getAllProjects" type="tns:getAllProjects"/>
+
+<xs:element name="getAllProjectsResponse" type="tns:getAllProjectsResponse"/>
+
+<xs:element name="getProjekt" type="tns:getProjekt"/>
+
+<xs:element name="getProjektResponse" type="tns:getProjektResponse"/>
+
+<xs:element name="updateProjekt" type="tns:updateProjekt"/>
+
+<xs:element name="updateProjektResponse" type="tns:updateProjektResponse"/>
+
+<xs:complexType name="deleteProjekt">
+<xs:sequence>
+<xs:element name="idProjektu" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteProjektResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProjekt">
+<xs:sequence>
+<xs:element name="idProjektu" type="xs:int"/>
+<xs:element name="tytul" type="xs:string" minOccurs="0"/>
+<xs:element name="opis" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateProjektResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllProjects">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllProjectsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:projekt" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="projekt">
+<xs:sequence>
+<xs:element name="idProjektu" type="xs:int"/>
+<xs:element name="opis" type="xs:string" minOccurs="0"/>
+<xs:element name="tytul" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProjekt">
+<xs:sequence>
+<xs:element name="idProjektu" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProjektResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:projekt" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createProjekt">
+<xs:sequence>
+<xs:element name="nrIndeksu" type="xs:int"/>
+<xs:element name="tytul" type="xs:string" minOccurs="0"/>
+<xs:element name="opis" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createProjektResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

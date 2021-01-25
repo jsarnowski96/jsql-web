@@ -18,21 +18,21 @@
             <classpath path="${java.home}/../lib/tools.jar:${j2ee.platform.wsimport.classpath}"/>
         </taskdef>
     </target>
-    <target name="wsimport-client-StudentService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/StudentService"/>
-        <property name="wsdl-StudentService" location="${meta.inf}/xml-resources/web-service-references/StudentService/wsdl/localhost_8080/WebService/StudentService.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/StudentService" destdir="${build.generated.dir}/jax-wsCache/StudentService" wsdl="${wsdl-StudentService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/WebService/StudentService?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${wsdl-StudentService}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/StudentService"/>
+    <target name="wsimport-client-ProjektService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ProjektService"/>
+        <property name="wsdl-ProjektService" location="${meta.inf}/xml-resources/web-service-references/ProjektService/wsdl/localhost_8080/WebService/ProjektService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ProjektService" destdir="${build.generated.dir}/jax-wsCache/ProjektService" wsdl="${wsdl-ProjektService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/WebService/ProjektService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-ProjektService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ProjektService"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/StudentService">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ProjektService">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-StudentService" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/StudentService"/>
+    <target name="wsimport-client-clean-ProjektService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/ProjektService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/ug/wzr"/>
     </target>
     <target name="wsimport-client-ProjektStudentService" depends="wsimport-init">
@@ -52,5 +52,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/ProjektStudentService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/ug/wzr"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-StudentService, wsimport-client-ProjektStudentService"/>
+    <target name="wsimport-client-StudentService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/StudentService"/>
+        <property name="wsdl-StudentService" location="${meta.inf}/xml-resources/web-service-references/StudentService/wsdl/localhost_8080/WebService/StudentService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/StudentService" destdir="${build.generated.dir}/jax-wsCache/StudentService" wsdl="${wsdl-StudentService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/WebService/StudentService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-StudentService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/StudentService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/StudentService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-StudentService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/StudentService"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/ug/wzr"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-ProjektService, wsimport-client-ProjektStudentService, wsimport-client-StudentService"/>
 </project>

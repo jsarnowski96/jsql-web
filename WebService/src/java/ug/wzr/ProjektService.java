@@ -20,6 +20,7 @@ import javax.jws.WebParam;
  */
 @WebService(serviceName = "ProjektService")
 public class ProjektService {
+    // initialize DatabaseConnection object for inbound DB transactions
     public DatabaseConnection databaseConnection = new DatabaseConnection();
     public Connection connection;
     
@@ -28,6 +29,7 @@ public class ProjektService {
      */
     @WebMethod(operationName = "getAllProjects")
     public ArrayList<Projekt> getAllProjects() {
+        // invoke internal method establishing connection with local database
         databaseConnection.ConnectToDatabase();
         connection = databaseConnection.getConnection();
         
@@ -104,16 +106,14 @@ public class ProjektService {
         databaseConnection.ConnectToDatabase();
         connection = databaseConnection.getConnection();
         
-        Projekt projekt;
         int ds;
         String query = "use ug_wzr; delete from ProjektyStudenci where idProjektu = " + Integer.toString(idProjektu);
-        //String query = "use ug_wzr; delete from Projekty where idProjektu = " + Integer.toString(idProjektu);
         
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ds = ps.executeUpdate();
             
-            if(ds > 0) {    
+            if(ds >= 0) {    
                 query = "delete from Projekty where id = " + Integer.toString(idProjektu);
                 ps.close();
                 ps = connection.prepareStatement(query);

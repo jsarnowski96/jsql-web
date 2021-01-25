@@ -4,8 +4,10 @@
     <system systemId="http://localhost:8080/SA_Lab5_Web/Usluga?xsd=1" uri="src/conf/xml-resources/web-service-references/Usluga/wsdl/localhost_8080/SA_Lab5_Web/Usluga.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/WebService/Usluga?wsdl" uri="src/conf/xml-resources/web-service-references/Usluga/wsdl/localhost_8080/WebService/Usluga.wsdl"/>
     <system systemId="http://localhost:8080/WebService/Usluga?xsd=1" uri="src/conf/xml-resources/web-service-references/Usluga/wsdl/localhost_8080/WebService/Usluga.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/WebService/StudentService?wsdl" uri="src/conf/xml-resources/web-service-references/StudentService/wsdl/localhost_8080/WebService/StudentService.wsdl"/>
-    <system systemId="http://localhost:8080/WebService/StudentService?xsd=1" uri="src/conf/xml-resources/web-service-references/StudentService/wsdl/localhost_8080/WebService/StudentService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebService/ProjektService?wsdl" uri="src/conf/xml-resources/web-service-references/ProjektService/wsdl/localhost_8080/WebService/ProjektService.wsdl"/>
+    <system systemId="http://localhost:8080/WebService/ProjektService?xsd=1" uri="src/conf/xml-resources/web-service-references/ProjektService/wsdl/localhost_8080/WebService/ProjektService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/WebService/ProjektStudentService?wsdl" uri="src/conf/xml-resources/web-service-references/ProjektStudentService/wsdl/localhost_8080/WebService/ProjektStudentService.wsdl"/>
     <system systemId="http://localhost:8080/WebService/ProjektStudentService?xsd=1" uri="src/conf/xml-resources/web-service-references/ProjektStudentService/wsdl/localhost_8080/WebService/ProjektStudentService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebService/StudentService?wsdl" uri="src/conf/xml-resources/web-service-references/StudentService/wsdl/localhost_8080/WebService/StudentService.wsdl"/>
+    <system systemId="http://localhost:8080/WebService/StudentService?xsd=1" uri="src/conf/xml-resources/web-service-references/StudentService/wsdl/localhost_8080/WebService/StudentService.xsd_1.xsd"/>
 </catalog>

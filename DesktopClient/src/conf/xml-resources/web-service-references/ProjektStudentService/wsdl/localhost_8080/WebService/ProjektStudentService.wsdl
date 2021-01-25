@@ -4,6 +4,12 @@
 <xsd:import namespace="http://wzr.ug/" schemaLocation="http://localhost:8080/WebService/ProjektStudentService?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="addToProject">
+<part name="parameters" element="tns:addToProject"/>
+</message>
+<message name="addToProjectResponse">
+<part name="parameters" element="tns:addToProjectResponse"/>
+</message>
 <message name="getAllStudentProjects">
 <part name="parameters" element="tns:getAllStudentProjects"/>
 </message>
@@ -11,6 +17,10 @@
 <part name="parameters" element="tns:getAllStudentProjectsResponse"/>
 </message>
 <portType name="ProjektStudentService">
+<operation name="addToProject">
+<input wsam:Action="http://wzr.ug/ProjektStudentService/addToProjectRequest" message="tns:addToProject"/>
+<output wsam:Action="http://wzr.ug/ProjektStudentService/addToProjectResponse" message="tns:addToProjectResponse"/>
+</operation>
 <operation name="getAllStudentProjects">
 <input wsam:Action="http://wzr.ug/ProjektStudentService/getAllStudentProjectsRequest" message="tns:getAllStudentProjects"/>
 <output wsam:Action="http://wzr.ug/ProjektStudentService/getAllStudentProjectsResponse" message="tns:getAllStudentProjectsResponse"/>
@@ -18,6 +28,15 @@
 </portType>
 <binding name="ProjektStudentServicePortBinding" type="tns:ProjektStudentService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="addToProject">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getAllStudentProjects">
 <soap:operation soapAction=""/>
 <input>

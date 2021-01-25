@@ -5,17 +5,51 @@
  */
 package ug.wzr.client;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.xml.ws.WebServiceRef;
+import ug.wzr.Projekt;
+import ug.wzr.ProjektService_Service;
+import ug.wzr.Student;
+
 /**
  *
  * @author jsarnowski
  */
 public class ProjektyFrame extends javax.swing.JFrame {
 
+    @WebServiceRef(wsdlLocation = "META-INF/wsdl/localhost_8080/WebService/ProjektService.wsdl")
+    private static ProjektService_Service service;
+
+    private Object[][] data = new Object[][]{};
+    private List<Projekt> projekty;
+    private DefaultTableModel model;
+    
     /**
      * Creates new form ProjektyFrame
      */
     public ProjektyFrame() {
         initComponents();
+        
+        projekty = getAllProjects();
+        data = new Object[projekty.size()][4];
+        
+                
+        //studenciTable = new JTable(new DefaultTableModel(data, columnNames));
+        model = (DefaultTableModel) projektyTable.getModel();
+                
+        for(int i = 0; i < data.length; i++) {
+            data[i][0] = projekty.get(i).getIdProjektu();
+            data[i][1] = projekty.get(i).getTytul();
+            data[i][2] = projekty.get(i).getOpis();
+            
+            model.addRow(data[i]);
+        }
+                
+        projektyTable.setModel(model);
+        
+        this.setTitle("Studenci");
+        this.pack();
     }
 
     /**
@@ -27,17 +61,65 @@ public class ProjektyFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        frameTitleLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        projektyTable = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        frameTitleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        frameTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        frameTitleLabel.setText("Projekty");
+
+        projektyTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id projektu", "Tytuł", "Opis", "Akcje"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        projektyTable.setCellSelectionEnabled(true);
+        jScrollPane1.setViewportView(projektyTable);
+        projektyTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(161, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(frameTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(329, 329, 329))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(151, 151, 151))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(frameTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,5 +161,43 @@ public class ProjektyFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel frameTitleLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable projektyTable;
     // End of variables declaration//GEN-END:variables
+
+    private static java.util.List<ug.wzr.Projekt> getAllProjects() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.ProjektService port = service.getProjektServicePort();
+        return port.getAllProjects();
+    }
+
+    private static boolean createProjekt(int nrIndeksu, java.lang.String tytul, java.lang.String opis) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.ProjektService port = service.getProjektServicePort();
+        return port.createProjekt(nrIndeksu, tytul, opis);
+    }
+
+    private static Projekt getProjekt(int idProjektu) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.ProjektService port = service.getProjektServicePort();
+        return port.getProjekt(idProjektu);
+    }
+
+    private static boolean updateProjekt(int idProjektu, java.lang.String tytul, java.lang.String opis) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.ProjektService port = service.getProjektServicePort();
+        return port.updateProjekt(idProjektu, tytul, opis);
+    }
+
+    private static boolean deleteProjekt(int idProjektu) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ug.wzr.ProjektService port = service.getProjektServicePort();
+        return port.deleteProjekt(idProjektu);
+    }
 }
